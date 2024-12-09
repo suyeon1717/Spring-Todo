@@ -15,4 +15,10 @@ public interface TodoRepository {
     List<TodoResponseDto> findAllTodos();
 
     Todo findTodoByIdOrElseThrow(Long todoId);
+
+    Boolean pwCheck(Long todoId, String password);
+
+    int updateContents(Long todoId, String contents, LocalDateTime modifiedDateTime);
+
+    int updateUserName(Long todoId, String userName, LocalDateTime modifiedDateTime);
 }

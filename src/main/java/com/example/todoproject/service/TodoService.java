@@ -16,4 +16,6 @@ public interface TodoService {
 
     TodoResponseDto findTodoById(Long todoId); // 선택 일정 조회 (id로 조회)
 
+    TodoResponseDto updateTodo(Long todoId, String contents, String userName, String password); // 선택 일정 수정 (내용, 작성자명만)
+
 }

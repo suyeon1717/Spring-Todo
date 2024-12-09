@@ -66,4 +66,17 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long todoId) {
         return new ResponseEntity<>(todoService.findTodoById(todoId), HttpStatus.OK);
     }
+
+    /**
+     * 선택 일정 수정 API (일정 내용, 작성자명만 수정 가능)
+     *
+     */
+    @PatchMapping("/{todoId}")
+    public ResponseEntity<TodoResponseDto> updateTodo(
+            @PathVariable Long todoId,
+            @RequestBody TodoRequestDto dto
+    ) {
+        return new ResponseEntity<>(todoService.updateTodo(todoId, dto.getContents(), dto.getUserName(), dto.getPassword()), HttpStatus.OK);
+    }
+
 }
