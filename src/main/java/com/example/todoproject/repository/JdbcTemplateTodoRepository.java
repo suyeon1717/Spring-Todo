@@ -74,6 +74,7 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
         return jdbcTemplate.query("select * from todo", todoRowMapper());
     }
 
+    // todoRowMapper() : RowMapper<TodoResponseDto>
     private RowMapper<TodoResponseDto> todoRowMapper() {
         return new RowMapper<TodoResponseDto>() {
             @Override
@@ -95,5 +96,39 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
             }
         };
     }
+
+    @Override
+    public Todo findTodoByIdOrElseThrow(Long todoId) {
+
+        List<Todo> result = jdbcTemplate.query("select * from todo where todoId = ?", todoRowMapperV2(), todoId);
+        return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + todoId));
+
+    }
+
+    // todoRowMapperV2() : RowMapper<Todo>
+    private RowMapper<Todo> todoRowMapperV2() {
+        return new RowMapper<Todo>() {
+            @Override
+            public Todo mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Timestamp createdDateTimestamp = rs.getTimestamp("createdDate");
+                LocalDateTime createdDate = createdDateTimestamp.toLocalDateTime();
+
+                Timestamp modifiedDateTimestamp = rs.getTimestamp("lastModifiedDate");
+                LocalDateTime modifiedDate = modifiedDateTimestamp.toLocalDateTime();
+
+                return new Todo(
+                        rs.getLong("todoId"),
+                        rs.getString("contents"),
+                        rs.getString("userName"),
+                        rs.getString("password"),
+                        createdDate,
+                        modifiedDate
+                );
+            }
+        };
+    }
+
+
+
 
 }

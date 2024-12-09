@@ -14,4 +14,6 @@ public interface TodoService {
 
     List<TodoResponseDto> findAllTodos(); // 파라미터 둘 다 충족 x 전체 목록 반환
 
+    TodoResponseDto findTodoById(Long todoId); // 선택 일정 조회 (id로 조회)
+
 }

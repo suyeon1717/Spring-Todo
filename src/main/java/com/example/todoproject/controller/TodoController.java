@@ -57,4 +57,13 @@ public class TodoController {
         // 조회 요청이 들어오면 todoService에 넘겨줌
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+    /**
+     * 선택 일정 조회 API (id로 조회)
+     *
+     */
+    @GetMapping("/{todoId}")
+    public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long todoId) {
+        return new ResponseEntity<>(todoService.findTodoById(todoId), HttpStatus.OK);
+    }
 }

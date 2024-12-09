@@ -45,4 +45,11 @@ public class TodoServiceImpl implements TodoService {
         return allTodos;
     }
 
+    @Override
+    public TodoResponseDto findTodoById(Long todoId) {
+        Todo todo = todoRepository.findTodoByIdOrElseThrow(todoId);
+        return new TodoResponseDto(todo);
+    }
+
+
 }
