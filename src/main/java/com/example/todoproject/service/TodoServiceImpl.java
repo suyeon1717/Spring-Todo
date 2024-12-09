@@ -35,7 +35,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public List<TodoResponseDto> findTodos(LocalDateTime lastModifiedDate, String userName) {
+    public List<TodoResponseDto> findTodos(String lastModifiedDate, String userName) {
 
         return todoRepository.findTodos(lastModifiedDate, userName);
     }

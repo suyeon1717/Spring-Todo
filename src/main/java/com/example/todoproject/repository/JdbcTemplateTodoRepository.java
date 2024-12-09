@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,17 +53,21 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
     }
 
     @Override
-    public List<TodoResponseDto> findTodos(LocalDateTime lastModifiedDate, String userName) {
+    public List<TodoResponseDto> findTodos(String lastModifiedDate, String userName) {
         String sql = "SELECT * FROM todo WHERE 1=1";  // 기본 조건 (무조건 true)
         List<Object> params = new ArrayList<>();
 
         if (lastModifiedDate != null ) {
-            sql += " AND lastModifiedDate = ?";
-            params.add(lastModifiedDate);
+            // String to LocalDateTime
+            LocalDateTime toLocalDateTime = LocalDate.parse(lastModifiedDate).atStartOfDay();
+
+            sql += " AND DATE(lastModifiedDate) = ? order by lastModifiedDate DESC";
+            params.add(toLocalDateTime.toLocalDate());
         }
 
         if (userName != null) {
-            sql += " AND userName = ?";
+            System.out.println("123");
+            sql += " AND userName = ? order by lastModifiedDate DESC";
             params.add(userName);
         }
         return jdbcTemplate.query(sql, params.toArray(), todoRowMapper());
@@ -71,7 +76,7 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
 
     @Override
     public List<TodoResponseDto> findAllTodos() {
-        return jdbcTemplate.query("select * from todo", todoRowMapper());
+        return jdbcTemplate.query("select * from todo order by lastModifiedDate DESC", todoRowMapper());
     }
 
     // todoRowMapper() : RowMapper<TodoResponseDto>

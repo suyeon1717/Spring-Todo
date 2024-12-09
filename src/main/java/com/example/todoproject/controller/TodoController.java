@@ -42,7 +42,7 @@ public class TodoController {
 
     @GetMapping
     public ResponseEntity<List<TodoResponseDto>> findTodos(
-            @RequestParam(required = false) LocalDateTime lastModifiedDate,
+            @RequestParam(required = false) String lastModifiedDate,
             @RequestParam(required = false) String userName
             ){
 
