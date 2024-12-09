@@ -68,7 +68,7 @@ public class TodoController {
     }
 
     /**
-     * 선택 일정 수정 API (일정 내용, 작성자명만 수정 가능)
+     * 선택 일정 수정 API (id로 조회하여 비밀번호가 일치할 경우 일정 내용, 작성자명만 수정 가능)
      *
      */
     @PatchMapping("/{todoId}")
@@ -77,6 +77,21 @@ public class TodoController {
             @RequestBody TodoRequestDto dto
     ) {
         return new ResponseEntity<>(todoService.updateTodo(todoId, dto.getContents(), dto.getUserName(), dto.getPassword()), HttpStatus.OK);
+    }
+
+    /**
+     * 선택 일정 삭제 API (id로 조회하여 비밀번호가 일치할 경우 삭제)
+     *
+     */
+
+    @DeleteMapping("/{todoId}")
+    public ResponseEntity<Void> deleteTodo(
+            @PathVariable Long todoId,
+            @RequestBody TodoRequestDto dto
+    ) {
+        todoService.deleteTodo(todoId, dto.getPassword());
+        // 성공한 경우
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

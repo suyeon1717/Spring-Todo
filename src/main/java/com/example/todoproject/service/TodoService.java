@@ -18,4 +18,6 @@ public interface TodoService {
 
     TodoResponseDto updateTodo(Long todoId, String contents, String userName, String password); // 선택 일정 수정 (내용, 작성자명만)
 
+    void deleteTodo(Long todoId, String password); // 선택 일정 삭제
+
 }

@@ -131,8 +131,6 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
     @Override
     public Boolean pwCheck(Long todoId, String password) {
         String truePw = jdbcTemplate.queryForObject("select password from todo where todoId = ?", String.class, todoId);
-        System.out.println(truePw);
-        System.out.println(password);
         // 입력한 pw와 비교
         return truePw.equals(password);
     }
@@ -145,6 +143,11 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
     @Override
     public int updateUserName(Long todoId, String userName, LocalDateTime modifiedDateTime) {
         return jdbcTemplate.update("update todo set userName = ?, lastModifiedDate = ? where todoId = ?", userName, modifiedDateTime, todoId);
+    }
+
+    @Override
+    public int deleteTodo(Long todoId) {
+        return jdbcTemplate.update("delete from todo where todoId =?", todoId);
     }
 
 

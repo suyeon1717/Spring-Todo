@@ -21,4 +21,6 @@ public interface TodoRepository {
     int updateContents(Long todoId, String contents, LocalDateTime modifiedDateTime);
 
     int updateUserName(Long todoId, String userName, LocalDateTime modifiedDateTime);
+
+    int deleteTodo(Long todoId);
 }
