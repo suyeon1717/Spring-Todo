@@ -17,10 +17,10 @@ public class Todo {
     private LocalDateTime lastModifiedDate;
 
     // 생성자
-    public Todo(String contents, String password, String userName) {
+    public Todo(String contents, String userName, String password) {
         this.contents = contents;
-        this.password = password;
         this.userName = userName;
+        this.password = password;
 
         // 작성일, 수정일 yyyy-MM-dd HH:mm:ss 형식으로 포맷
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

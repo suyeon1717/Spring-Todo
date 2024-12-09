@@ -6,6 +6,10 @@ import com.example.todoproject.entity.Todo;
 import com.example.todoproject.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class TodoServiceImpl implements TodoService {
 
@@ -25,4 +29,20 @@ public class TodoServiceImpl implements TodoService {
         // DB 저장 (Repository)
         return todoRepository.saveTodo(todo);
     }
+
+    @Override
+    public List<TodoResponseDto> findTodos(LocalDateTime lastModifiedDate, String userName) {
+
+        return todoRepository.findTodos(lastModifiedDate, userName);
+    }
+
+    @Override
+    public List<TodoResponseDto> findAllTodos() {
+
+        // 전체 조회 -> memoRepository 호출
+        List<TodoResponseDto> allTodos = todoRepository.findAllTodos();
+
+        return allTodos;
+    }
+
 }

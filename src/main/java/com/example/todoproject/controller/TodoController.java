@@ -7,10 +7,10 @@ import com.example.todoproject.service.TodoService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController// @Controller + @ResponseBody
 @RequestMapping("/todos")
@@ -33,5 +33,28 @@ public class TodoController {
     public ResponseEntity<TodoResponseDto> createTodo(@RequestBody TodoRequestDto dto){
         // ServiceLayer 호출 및 응답
         return new ResponseEntity<>(todoService.saveTodo(dto), HttpStatus.CREATED);
+    }
+
+    /**
+     * 일정 전체 조회 API (수정일, 작성자명 중 한 가지 이상을 충족하거나 둘 다 충족하지 않을 수도 있음)
+     *
+     */
+
+    @GetMapping
+    public ResponseEntity<List<TodoResponseDto>> findTodos(
+            @RequestParam(required = false) LocalDateTime lastModifiedDate,
+            @RequestParam(required = false) String userName
+            ){
+
+        List<TodoResponseDto> dto;
+
+        if(lastModifiedDate == null && userName == null) {
+            dto = todoService.findAllTodos();
+        }
+        else{
+            dto = todoService.findTodos(lastModifiedDate, userName);
+        }
+        // 조회 요청이 들어오면 todoService에 넘겨줌
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 }

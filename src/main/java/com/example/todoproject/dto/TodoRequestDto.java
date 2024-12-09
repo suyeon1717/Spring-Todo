@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 public class TodoRequestDto {
 
     private String contents;
-    private String password;
     private String userName;
+    private String password;
 }
