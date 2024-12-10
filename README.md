@@ -35,10 +35,17 @@ CREATE TABLE todo
 </details><br>
 
 ### - Level 1 일정 생성 및 조회
-☑️ 일정 생성 <br>
+☑️ 일정 생성 
+- 일정 생성 시 포함되어야 할 데이터는 할일, 작성자명, 비밀번호, 작성/수정일(날짜와 시간을 모두 포함한 형태)
+- 각 일정의 고유 식별자를 자동으로 생성하여 관리
+- 최초 입력 시, 수정일은 작성일과 동일<br>
 ![image](https://github.com/user-attachments/assets/0869c4ac-a9a8-47f0-b19c-6926ab9ad418)<br>
-☑️ 전체 일정 조회 <br>
-- case1. 수정일 검색 <br>
+
+☑️ 전체 일정 조회
+- 수정일(형태: YYYY-MM-DD), 작성자명을 바탕으로 조회
+- 조건 중 한 가지만을 충족하거나, 둘 다 충족을 하지 않을 수도, 두 가지를 모두 충족할 수도 있다.
+
+<br>- case1. 수정일 검색 <br>
 <img width="618" alt="image" src="https://github.com/user-attachments/assets/cef2a2ef-2b27-4c58-a040-cdf3c343749c">
 <details>
 <summary>결과</summary>
@@ -114,7 +121,7 @@ CREATE TABLE todo
 - case3. 수정일 && 작성자명 검색 <br>
 <img width="663" alt="image" src="https://github.com/user-attachments/assets/8d745849-8e20-46ea-9dd1-8db1b1f68517"><br><br>
 
-- case4. 수정일과 작성자명 검색 X <br>
+<br>- case4. 수정일과 작성자명 검색 X <br>
 모든 일정이 내림차순으로 조회됨<br>
 <img width="663" alt="image" src="https://github.com/user-attachments/assets/ec4d96a0-cb15-45b0-9b7f-6114bcc715b7"><br>
 <details>
@@ -194,20 +201,22 @@ CREATE TABLE todo
 ☑️ 선택한 일정 조회 <br>
 todoId를 파라미터로 받아 해당하는 Row를 조회하여 응답<br>
 <img width="652" alt="image" src="https://github.com/user-attachments/assets/dd528f13-11a2-47a5-94e4-a0ae8ea428b6"><br>
+<br>
 
-#### - Level 2 일정 수정 및 삭제
+### - Level 2 일정 수정 및 삭제
 ☑️ 선택한 일정 수정 <br>
 todoId를 파라미터로 받아 해당하는 Row의 비밀번호와 입력한 비밀번호를 검증한 후 내용 or 작성자명 수정
-- case1. 정상 수정<br>
+<br>- case1. 정상 수정<br>
 <img width="647" alt="image" src="https://github.com/user-attachments/assets/ed9a37c8-6bc5-4f72-92b7-bb23147ea1ba"><br>
-- case2. 비밀번호 오류<br>
+<br>- case2. 비밀번호 오류<br>
 <img width="647" alt="image" src="https://github.com/user-attachments/assets/de48a27e-2a9f-4517-88cf-dfce5354fbba"><br>
 
-☑️ 선택한 일정 삭제 <br>
-- case1. 정상 삭제<br>
+
+<br>☑️ 선택한 일정 삭제 <br>
+<br>- case1. 정상 삭제<br>
 <img width="651" alt="image" src="https://github.com/user-attachments/assets/84f373aa-98d1-4e8f-b8cd-301379155177">
 <br>
-- case2. 비밀번호 오류<br>
+<br>- case2. 비밀번호 오류<br>
 <img width="650" alt="image" src="https://github.com/user-attachments/assets/dae9e26c-4f3a-4481-b3bf-d0c88cfe0112">
 <br>
 
