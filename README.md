@@ -1,6 +1,12 @@
 # [Spring] Todo Project
 #### JDBC를 활용한 CRUD 구현
-
+JDBC(Java Database Connectivity)란?
+- Java에서 데이터베이스와 연결하여 데이터를 조회, 삽입, 수정, 삭제 등의 작업을 수행할 수 있도록 지원하는 Java 표준 API
+- JDBC는 Java와 데이터베이스 간의 다리 역할을 하며, 다양한 데이터베이스 시스템과 상호작용할 수 있도록 설계되었다.
+  
+CRUD란?
+- 데이터베이스 관리 및 응용 프로그램 개발에서 사용되는 기본적인 데이터 관리 기능
+- Create (생성), Read (조회), Update (수정), Delete (삭제)
 ## 📋 요구사항 및 구현 결과
 ### - Level 0 API 명세 및 ERD 작성
 ☑️ API 명세서 작성 <br>
