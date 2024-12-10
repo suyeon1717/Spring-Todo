@@ -103,7 +103,6 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
 
         List<Todo> result = jdbcTemplate.query("select * from todo where todoId = ?", todoRowMapperV2(), todoId);
         return result.stream().findAny().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Does not exist id = " + todoId));
-
     }
 
     // todoRowMapperV2() : RowMapper<Todo>

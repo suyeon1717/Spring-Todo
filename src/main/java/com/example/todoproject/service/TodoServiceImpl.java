@@ -58,6 +58,8 @@ public class TodoServiceImpl implements TodoService {
         String formatted = modifiedDateTime.format(formatter);
         modifiedDateTime = LocalDateTime.parse(formatted, formatter);
 
+        Todo todo = todoRepository.findTodoByIdOrElseThrow(todoId);
+
         // 비밀번호 True
         if(todoRepository.pwCheck(todoId, password)){
             // 필수값 검증
@@ -79,8 +81,7 @@ public class TodoServiceImpl implements TodoService {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No data has been modified.");
             }
             // 수정된 일정 조회
-            Todo todo = todoRepository.findTodoByIdOrElseThrow(todoId);
-            return new TodoResponseDto(todo);
+            return findTodoById(todoId);
         }
         // 비밀번호 False
         else
@@ -91,17 +92,17 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public void deleteTodo(Long todoId, String password) {
 
+        Todo todo = todoRepository.findTodoByIdOrElseThrow(todoId);
+
         // 비밀번호 True
         if(todoRepository.pwCheck(todoId, password)){
             int deletedRow = todoRepository.deleteTodo(todoId);
             if(deletedRow == 0)
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No data has been modified.");
-            System.out.println(deletedRow);
         }
         // 비밀번호 False
         else
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid password");
     }
-
 
 }
