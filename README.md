@@ -9,7 +9,7 @@
 <img width="358" alt="image" src="https://github.com/user-attachments/assets/d83bde90-cfea-4c34-aaac-541584a68748"><br>
 ☑️ SQL 작성
 <details>
-<summary>schedul.sql</summary>
+<summary>schedul.sql</summary>
 <div markdown="1">
 
 ```java
@@ -35,7 +35,7 @@ CREATE TABLE todo
 - case1. 수정일 검색 <br>
 <img width="618" alt="image" src="https://github.com/user-attachments/assets/cef2a2ef-2b27-4c58-a040-cdf3c343749c">
 <details>
-<summary>결과 </summary>
+<summary>결과</summary>
 <div markdown="1">
 
 ```json
@@ -75,7 +75,7 @@ CREATE TABLE todo
 - case2. 작성자명 검색 <br>
 <img width="618" alt="image" src="https://github.com/user-attachments/assets/842d19fa-d55f-4f35-aa66-2f726145d8d6"><br>
 <details>
-<summary>결과 </summary>
+<summary>결과</summary>
 <div markdown="1">
 
 ```json
@@ -112,7 +112,7 @@ CREATE TABLE todo
 모든 일정이 내림차순으로 조회됨<br>
 <img width="663" alt="image" src="https://github.com/user-attachments/assets/ec4d96a0-cb15-45b0-9b7f-6114bcc715b7"><br>
 <details>
-<summary>결과 </summary>
+<summary>결과</summary>
 <div markdown="1">
 
 ```json
