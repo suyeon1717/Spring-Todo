@@ -10,9 +10,9 @@ public interface TodoService {
 
     TodoResponseDto saveTodo(TodoRequestDto dto); // 일정 생성
 
-    List<TodoResponseDto> findTodos(String lastModifiedDate, String userName); // 일정 조회
+    List<TodoResponseDto> findTodos(String date, String username); // 일정 조회
 
-    List<TodoResponseDto> findAllTodos(); // 파라미터 둘 다 충족 x 전체 목록 반환
+//    List<TodoResponseDto> findAllTodos(); // 파라미터 둘 다 충족 x 전체 목록 반환
 
     TodoResponseDto findTodoById(Long todoId); // 선택 일정 조회 (id로 조회)
 

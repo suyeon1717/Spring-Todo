@@ -53,30 +53,26 @@ public class JdbcTemplateTodoRepository implements TodoRepository{
     }
 
     @Override
-    public List<TodoResponseDto> findTodos(String lastModifiedDate, String userName) {
-        String sql = "SELECT * FROM todo WHERE 1=1";  // 기본 조건 (무조건 true)
+    public List<TodoResponseDto> findTodos(String date, String username) {
+        String sql = "SELECT * FROM todo WHERE 1=1 ";  // 기본 조건 (무조건 true)
         List<Object> params = new ArrayList<>();
 
-        if (lastModifiedDate != null ) {
+        if (date != null ) {
             // String to LocalDateTime
-            LocalDateTime toLocalDateTime = LocalDate.parse(lastModifiedDate).atStartOfDay();
+            LocalDateTime toLocalDateTime = LocalDate.parse(date).atStartOfDay();
 
-            sql += " AND DATE(lastModifiedDate) = ? order by lastModifiedDate DESC";
+            sql += "AND DATE(lastModifiedDate) = ? ";
             params.add(toLocalDateTime.toLocalDate());
         }
 
-        if (userName != null) {
-            System.out.println("123");
-            sql += " AND userName = ? order by lastModifiedDate DESC";
-            params.add(userName);
+        if (username != null) {
+            sql += "AND userName = ? ";
+            params.add(username);
         }
+
+        sql += "order by lastModifiedDate DESC";
+
         return jdbcTemplate.query(sql, params.toArray(), todoRowMapper());
-    }
-
-
-    @Override
-    public List<TodoResponseDto> findAllTodos() {
-        return jdbcTemplate.query("select * from todo order by lastModifiedDate DESC", todoRowMapper());
     }
 
     // todoRowMapper() : RowMapper<TodoResponseDto>

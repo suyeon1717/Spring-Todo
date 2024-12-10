@@ -37,30 +37,27 @@ public class TodoController {
 
     /**
      * 일정 전체 조회 API (수정일, 작성자명 중 한 가지 이상을 충족하거나 둘 다 충족하지 않을 수도 있음)
-     *
+     * @param : date 수정일, username 작성자명 (둘 다 필수 x)
+     * @return : {@link ResponseEntity<TodoResponseDto>} JSON 응답
      */
 
     @GetMapping
     public ResponseEntity<List<TodoResponseDto>> findTodos(
-            @RequestParam(required = false) String lastModifiedDate,
-            @RequestParam(required = false) String userName
+            @RequestParam(required = false) String date,
+            @RequestParam(required = false) String username
             ){
 
         List<TodoResponseDto> dto;
 
-        if(lastModifiedDate == null && userName == null) {
-            dto = todoService.findAllTodos();
-        }
-        else{
-            dto = todoService.findTodos(lastModifiedDate, userName);
-        }
+        dto = todoService.findTodos(date, username);
         // 조회 요청이 들어오면 todoService에 넘겨줌
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
     /**
      * 선택 일정 조회 API (id로 조회)
-     *
+     * @param : todoId 식별자
+     * @return : {@link ResponseEntity<TodoResponseDto>} JSON 응답
      */
     @GetMapping("/{todoId}")
     public ResponseEntity<TodoResponseDto> findTodoById(@PathVariable Long todoId) {
@@ -69,7 +66,8 @@ public class TodoController {
 
     /**
      * 선택 일정 수정 API (id로 조회하여 비밀번호가 일치할 경우 일정 내용, 작성자명만 수정 가능)
-     *
+     * @param : todoId 식별자, {@link TodoRequestDto} 일정 수정 요청 객체
+     * @return : {@link ResponseEntity<TodoResponseDto>} JSON 응답
      */
     @PatchMapping("/{todoId}")
     public ResponseEntity<TodoResponseDto> updateTodo(
@@ -81,9 +79,9 @@ public class TodoController {
 
     /**
      * 선택 일정 삭제 API (id로 조회하여 비밀번호가 일치할 경우 삭제)
-     *
+     * @param : todoId 식별자, {@link TodoRequestDto} 일정 수정 요청 객체
+     * @return : {@link ResponseEntity<Void>}
      */
-
     @DeleteMapping("/{todoId}")
     public ResponseEntity<Void> deleteTodo(
             @PathVariable Long todoId,
@@ -91,7 +89,7 @@ public class TodoController {
     ) {
         todoService.deleteTodo(todoId, dto.getPassword());
         // 성공한 경우
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

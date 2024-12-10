@@ -14,7 +14,6 @@ public class TodoResponseDto {
     private Long todoId;
     private String contents;
     private String userName;
-//    private String password;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
