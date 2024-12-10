@@ -17,12 +17,12 @@ use todo;
 
 CREATE TABLE todo
 (
-    todoId   BIGINT       AUTO_INCREMENT PRIMARY KEY COMMENT '일정 식별자',
+    todoId   BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '일정 식별자',
     contents TEXT NOT NULL COMMENT '내용',
     userName VARCHAR(10) NOT NULL COMMENT '작성자명',
     password VARCHAR(16) NOT NULL COMMENT '비밀번호',
-    createdDate DATETIME COMMENT '작성일',
-    lastModifiedDate DATETIME COMMENT '수정일'
+    createdDate NOT NULL DATETIME COMMENT '작성일',
+    lastModifiedDate NOT NULL DATETIME COMMENT '수정일'
 );
 
 ```
